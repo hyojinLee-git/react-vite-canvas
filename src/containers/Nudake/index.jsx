@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./style.css";
 
+import image1 from "../../assets/nudake-1.jpg";
+import image2 from "../../assets/nudake-2.jpg";
+import image3 from "../../assets/nudake-3.jpg";
+
 const Nudake = () => {
     const canvasRef = useRef(null);
     useEffect(() => {
@@ -8,32 +12,36 @@ const Nudake = () => {
         const canvasParent = canvas.parentNode;
         const ctx = canvas.getContext("2d");
 
+        const imageSrcs = [image1, image2, image3];
+        let currIndex = 0;
+
         let canvasWidth, canvasHeight;
 
         function resize() {
             canvasWidth = canvasParent.clientWidth;
             canvasHeight = canvasParent.clientHeight;
             canvas.style.width = canvasWidth + "px";
-            canvas.style.hegith = canvasHeight + "px";
+            canvas.style.height = canvasHeight + "px";
             canvas.width = canvasWidth;
-            canvas.hegith = canvasHeight;
+            canvas.height = canvasHeight;
+
+            drawImage();
         }
 
-        let frameId;
-
-        function frame() {
-            frameId = requestAnimationFrame(frame);
-
-            ctx.fillRect(100, 100, 100, 100);
+        function drawImage() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            const image = new Image();
+            image.src = imageSrcs[currIndex];
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+            };
         }
 
         window.addEventListener("resize", resize);
         resize();
-        requestAnimationFrame(frame);
 
         return () => {
             window.removeEventListener("resize", resize);
-            cancelAnimationFrame(frameId);
         };
     }, []);
     return (
