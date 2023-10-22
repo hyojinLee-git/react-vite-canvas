@@ -53,14 +53,12 @@ const Nudake = () => {
         }
 
         function drawImage() {
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            // const image = new Image();
             const image = loadedImages[currIndex];
             ctx.globalCompositeOperation = "source-over";
             drawImageCenter(canvas, ctx, image);
 
             const nextImage = imageSrcs[(currIndex + 1) % imageSrcs.length];
-            canvas.style.backgroundImage = `url(${nextImage})`;
+            canvasParent.style.backgroundImage = `url(${nextImage})`;
         }
 
         function onMouseDown(e) {
@@ -83,6 +81,7 @@ const Nudake = () => {
 
         function drawCircles(e) {
             const nextPos = { x: e.offsetX, y: e.offsetY };
+            if (!prevPos) prevPos = nextPos;
             const dist = getDistance(prevPos, nextPos);
             const angle = getAngle(prevPos, nextPos);
 
