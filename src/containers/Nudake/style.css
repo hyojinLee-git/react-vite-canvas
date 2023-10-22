@@ -1,0 +1,13 @@
+.nudake {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 2px solid red;
+}
+
+.nudake > canvas {
+    position: absolute;
+}
