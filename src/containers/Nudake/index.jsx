@@ -20,6 +20,7 @@ const Nudake = () => {
         const ctx = canvas.getContext("2d");
 
         const imageSrcs = [image1, image2, image3];
+        const loadedImages = [];
         let currIndex = 0;
         let prevPos = { x: 0, y: 0 };
 
@@ -33,20 +34,33 @@ const Nudake = () => {
             canvas.width = canvasWidth;
             canvas.height = canvasHeight;
 
-            drawImage();
+            preloadImages().then(() => drawImage());
+        }
+
+        function preloadImages() {
+            return new Promise((resolve) => {
+                let loaded = 0;
+                imageSrcs.forEach((src) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        loaded += 1;
+                        loadedImages.push(img);
+                        if (loaded === imageSrcs.length) return resolve();
+                    };
+                });
+            });
         }
 
         function drawImage() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            const image = new Image();
-            image.src = imageSrcs[currIndex];
-            image.onload = () => {
-                ctx.globalCompositeOperation = "source-over";
-                drawImageCenter(canvas, ctx, image);
+            // const image = new Image();
+            const image = loadedImages[currIndex];
+            ctx.globalCompositeOperation = "source-over";
+            drawImageCenter(canvas, ctx, image);
 
-                const nextImage = imageSrcs[(currIndex + 1) % imageSrcs.length];
-                canvas.style.backgroundImage = `url(${nextImage})`;
-            };
+            const nextImage = imageSrcs[(currIndex + 1) % imageSrcs.length];
+            canvas.style.backgroundImage = `url(${nextImage})`;
         }
 
         function onMouseDown(e) {
