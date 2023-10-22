@@ -5,7 +5,12 @@ import "./style.css";
 import image1 from "../../assets/nudake-1.jpg";
 import image2 from "../../assets/nudake-2.jpg";
 import image3 from "../../assets/nudake-3.jpg";
-import { getAngle, getDistance, getScrupedPercent } from "../../utils/util";
+import {
+    drawImageCenter,
+    getAngle,
+    getDistance,
+    getScrupedPercent,
+} from "../../utils/util";
 
 const Nudake = () => {
     const canvasRef = useRef(null);
@@ -36,7 +41,11 @@ const Nudake = () => {
             const image = new Image();
             image.src = imageSrcs[currIndex];
             image.onload = () => {
-                ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+                ctx.globalCompositeOperation = "source-over";
+                drawImageCenter(canvas, ctx, image);
+
+                const nextImage = imageSrcs[(currIndex + 1) % imageSrcs.length];
+                canvas.style.backgroundImage = `url(${nextImage})`;
             };
         }
 
@@ -69,7 +78,7 @@ const Nudake = () => {
 
                 ctx.globalCompositeOperation = "destination-out";
                 ctx.beginPath();
-                ctx.arc(x, y, 50, 0, Math.PI * 2);
+                ctx.arc(x, y, canvasWidth / 16, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.closePath();
             }
@@ -79,7 +88,10 @@ const Nudake = () => {
 
         const checkPercent = throttle(() => {
             const percent = getScrupedPercent(ctx, canvasWidth, canvasHeight);
-            console.log(percent);
+            if (percent > 50) {
+                currIndex = (currIndex + 1) % imageSrcs.length;
+                drawImage();
+            }
         }, 500);
 
         canvas.addEventListener("mousedown", onMouseDown);
