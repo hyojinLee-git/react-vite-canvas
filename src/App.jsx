@@ -48,7 +48,7 @@ function App() {
                 <section className="section-4">
                     <canvas></canvas>
                     <aside>
-                        <h2>Javascript</h2>
+                        <h2>JavaScript</h2>
                         <h3>⭐️⭐️⭐️⭐️⭐️</h3>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing
