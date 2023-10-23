@@ -71,6 +71,7 @@ const RotateCanvas = () => {
         initMouse();
         initGround();
         initImageBoxes();
+        initIntersectionObserver();
 
         Events.on(mouseConstraint, "mousedown", () => {
             const newSeleted =
@@ -110,6 +111,24 @@ const RotateCanvas = () => {
                 mouse: mouse,
             });
             Composite.add(engine.world, mouseConstraint);
+        }
+
+        function initIntersectionObserver() {
+            const options = {
+                threshold: 0.5,
+            };
+            const observer = new IntersectionObserver((entries) => {
+                const canvasEntry = entries[0];
+                if (canvasEntry.isIntersecting) {
+                    runner.enabled = true;
+                    Render.run(render);
+                } else {
+                    runner.enabled = false;
+                    Render.stop(render);
+                }
+            }, options);
+
+            observer.observe(canvas);
         }
 
         function initGround() {
