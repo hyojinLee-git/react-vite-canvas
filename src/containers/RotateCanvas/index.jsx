@@ -65,7 +65,7 @@ const RotateCanvas = () => {
         const gravityPower = 0.5;
         let gravityDeg = 0;
 
-        let engine, render, runner, mouse, mouseConstraint;
+        let engine, render, runner, mouse, mouseConstraint, observer;
 
         initScene();
         initMouse();
@@ -117,7 +117,7 @@ const RotateCanvas = () => {
             const options = {
                 threshold: 0.5,
             };
-            const observer = new IntersectionObserver((entries) => {
+            observer = new IntersectionObserver((entries) => {
                 const canvasEntry = entries[0];
                 if (canvasEntry.isIntersecting) {
                     runner.enabled = true;
@@ -201,6 +201,16 @@ const RotateCanvas = () => {
             const rect = Bodies.rectangle(x, y, w, h, options);
             Composite.add(engine.world, rect);
         }
+
+        return () => {
+            observer.unobserve(canvas);
+
+            Composite.clear(engine.world);
+            Mouse.clearSourceEvents(mouse);
+            Runner.stop(runner);
+            Render.stop(render);
+            Engine.clear(engine);
+        };
     }, []);
     return (
         <div className="rotate-canvas-wrapper">
