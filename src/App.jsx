@@ -1,5 +1,6 @@
 import ArrowImg from "./assets/arrow.svg";
 import Nudake from "./containers/Nudake";
+import RotateCanvas from "./containers/RotateCanvas";
 
 function App() {
     return (
@@ -46,21 +47,7 @@ function App() {
                     </article>
                 </section>
                 <section className="section-4">
-                    <canvas></canvas>
-                    <aside>
-                        <h2>JavaScript</h2>
-                        <h3>⭐️⭐️⭐️⭐️⭐️</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illum velit quos dolores commodi. Cumque,
-                            neque? Quaerat aperiam, temporibus pariatur
-                            explicabo corrupti facere animi, tempora quo
-                            voluptas placeat quae commodi quas accusantium
-                            corporis. Illo hic cupiditate animi doloremque
-                            repudiandae! Quis dolor corporis aspernatur beatae
-                            dolore mollitia quidem praesentium porro sed saepe.
-                        </p>
-                    </aside>
+                    <RotateCanvas />
                 </section>
             </div>
             <footer>
