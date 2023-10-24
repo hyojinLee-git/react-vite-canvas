@@ -43,11 +43,10 @@ body {
     font-weight: bold;
 }
 
-.section-1 > header > ul {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-end;
+.section-1 > header > h2 {
     font-size: 2rem;
+    display: flex;
+    align-items: flex-end;
     padding-bottom: 0.5rem;
 }
 

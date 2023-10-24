@@ -3,9 +3,9 @@ import throttle from "lodash/throttle";
 import gsap from "gsap";
 import "./style.css";
 
-import image1 from "../../assets/nudake-1.jpg";
-import image2 from "../../assets/nudake-2.jpg";
-import image3 from "../../assets/nudake-3.jpg";
+import image1 from "../../assets/wallpaper1.jpeg";
+import image2 from "../../assets/wallpaper2.jpeg";
+import image3 from "../../assets/wallpaper3.jpeg";
 import {
     drawImageCenter,
     getAngle,

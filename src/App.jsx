@@ -1,6 +1,7 @@
-import ArrowImg from "./assets/arrow.svg";
 import Nudake from "./containers/Nudake";
 import RotateCanvas from "./containers/RotateCanvas";
+
+import ArrowImg from "./assets/arrow.svg";
 
 function App() {
     return (
@@ -9,11 +10,7 @@ function App() {
                 <section className="section-1">
                     <header>
                         <h1>Portfolio</h1>
-                        <ul>
-                            <li>instagram</li>
-                            <li>twitter</li>
-                            <li>codepen</li>
-                        </ul>
+                        <h2>hyojin Lee</h2>
                     </header>
                     <main>
                         <div>
@@ -51,7 +48,7 @@ function App() {
                 </section>
             </div>
             <footer>
-                <div className="email">test@gmail.com</div>
+                <div className="email">splato8899@gmail.com</div>
             </footer>
         </>
     );
